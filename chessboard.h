@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
-constexpr short queens = 8;
+constexpr unsigned short queens = 8;
 
 using chessboard = class chessboard final
 {
@@ -13,42 +14,42 @@ public:
 		for (auto& pos : rows_) pos = -1;
 	}
 
-	auto contains(const short& pos) -> bool
+	explicit chessboard(const std::vector<short>& vec)
+	{
+		for (unsigned short i = 0; i < queens; i++)
+			rows_[i] = vec[i];
+	}
+
+	auto contains(const short& pos) const -> bool
 	{
 		for (const auto& row : rows_)  // NOLINT(readability-use-anyofallof)
 			if (row == pos) return true;
 		return false;
 	}
 
-	auto no_conflicts() -> bool
+	auto no_conflicts() const -> bool
 	{
-		
+		for (unsigned short i = 0; i < queens; i++)
+		{
+			if (rows_[i] == -1)
+				break;
+
+			for (unsigned short j= 0; j < queens; j++)
+			{
+				if (i == j)
+					continue;
+
+				if (abs(i - j) == abs(rows_[i] - rows_[j]))
+					return false;
+			}
+		}
+
 		return true;
 	}
 
-	auto is_valid() -> bool
+	auto is_valid() const -> bool
 	{
 		return no_conflicts() && !contains(-1);
-	}
-
-	auto add_queen(const short& pos) -> bool
-	{
-		if (contains(pos) || !contains(-1))
-			return false;
-
-		short row = -1;
-		for (short i = 0; i < queens; i++)
-			if (row == rows_[i])
-			{
-				row = i;
-				break;
-			}
-		if (row < 0)
-			return false;
-
-		rows_[row] = pos;
-
-		return no_conflicts();
 	}
 
 	auto operator[](const short& index) -> short&
