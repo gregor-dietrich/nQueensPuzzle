@@ -1,14 +1,15 @@
 #include "chessboard.h"
+#include <vector>
 
 using namespace std;
 
 auto main() -> int
 {
 	vector<chessboard> solutions;
-
-	vector<unsigned short> elements_to_permute;
+	
+	unsigned short elements_to_permute [queens] = {};
 	for (unsigned short i = 0; i < queens; i++)
-		elements_to_permute.emplace_back(i);
+		elements_to_permute[i] = i;
 	
 	unsigned short c [queens] = {0};
 	unsigned short i = 0;
