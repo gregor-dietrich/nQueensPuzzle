@@ -1,23 +1,24 @@
 #pragma once
 #include <iostream>
 
-constexpr unsigned short queens = 8;
+// ReSharper disable once CppInconsistentNaming
+constexpr unsigned short Q = 8;
 
 class chessboard final
 {
-	unsigned short rows_ [queens] = {};
+	unsigned short rows_ [Q] = {};
 
 public:
-	explicit chessboard(const unsigned short source [queens])
+	explicit chessboard(const unsigned short source [Q])
 	{
-		for (unsigned short i = 0; i < queens; i++)
+		for (unsigned short i = 0; i < Q; i++)
 			rows_[i] = source[i];
 	}
 
 	auto is_valid() const -> bool
 	{
-		for (unsigned short i = 0; i < queens - 1; i++)
-			for (unsigned short j = 0; j < queens; j++)
+		for (unsigned short i = 0; i < Q - 1; i++)
+			for (unsigned short j = 0; j < Q; j++)
 				if (i != j && abs(i - j) == abs(rows_[i] - rows_[j]))
 					return false;
 		return true;
@@ -33,7 +34,7 @@ public:
 	{
 		for (const auto& pos : board.rows_)
 		{
-			for (unsigned short j = 0; j < queens; j++)
+			for (unsigned short j = 0; j < Q; j++)
 				std::cout << (pos == j ? "1" : "0");
 			std::cout << "\n";
 		}
