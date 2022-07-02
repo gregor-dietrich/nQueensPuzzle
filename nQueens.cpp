@@ -12,18 +12,18 @@ auto get_solutions() -> std::vector<chessboard>
 	{
 		if (Q == 1)
 		{
-			unsigned short solution [1] = {0};
+			uint8_t solution [1] = {0};
 			solutions.emplace_back(solution);
 		}
 		return solutions;
 	}
 	
-	unsigned short elements_to_permute [Q] = {};
-	for (unsigned short i = 0; i < Q; i++)
+	uint8_t elements_to_permute [Q] = {};
+	for (uint8_t i = 0; i < Q; i++)
 		elements_to_permute[i] = i;
 	
-	unsigned short c [Q] = {0};
-	unsigned short i = 0;
+	uint8_t c [Q] = {0};
+	uint8_t i = 0;
 	while (i < Q)
 	{
 		if (c[i] < i)
