@@ -6,11 +6,11 @@ auto main() -> int
 {
 	vector<chessboard> solutions;
 
-	vector<short> elements_to_permute;
-	for (short i = 0; i < queens; i++)
+	vector<unsigned short> elements_to_permute;
+	for (unsigned short i = 0; i < queens; i++)
 		elements_to_permute.emplace_back(i);
 	
-	short c [queens] = {0};
+	unsigned short c [queens] = {0};
 	unsigned short i = 0;
 	while (i < queens)
 	{
@@ -44,11 +44,8 @@ auto main() -> int
 	}
 
 	for (const auto& solution : solutions)
-	{
 		cout << solution;
-	}
-
-	cout << "Solutions found: " << solutions.size();
+	cout << "Solutions found: " << solutions.size() << "\n";
 
 	return 0;
 }
