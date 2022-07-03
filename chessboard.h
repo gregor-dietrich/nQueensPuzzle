@@ -7,7 +7,7 @@ constexpr uint8_t Q = 8;
 
 class chessboard final
 {
-	uint8_t rows_ [Q] = {};
+	uint8_t rows_ [Q] = {}; // sizeof(chessboard) equals Q
 
 public:
 	explicit chessboard(const uint8_t source [Q])
@@ -21,7 +21,7 @@ public:
 		for (uint8_t i = 0; i < Q - 1; i++)
 			for (uint8_t j = 0; j < Q; j++)
 				if (i != j && abs(i - j) == abs(rows_[i] - rows_[j]))
-					return false;
+					return false; // index/row delta equals value/column delta
 		return true;
 	}
 
