@@ -13,12 +13,9 @@ auto main() -> int
 		if (Q == 1)
 		{
 			uint8_t arr [1] = {0};
-			const auto solution = chessboard(arr);
-			solutions[solution_count] = solution;
+			cout << chessboard(arr);
 			solution_count++;
 		}
-		for (uint64_t i = 0; i < solution_count; i++)
-			cout << solutions[i];
 		cout << "Solutions found: " << solution_count << "\n";
 		return 0;
 	}
