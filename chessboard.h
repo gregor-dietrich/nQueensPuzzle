@@ -39,10 +39,10 @@ public:
 		for (const auto& pos : board.rows_)
 		{
 			for (uint8 j = 0; j < Q; j++)
-				std::cout << (pos == j ? "1" : "0");
-			std::cout << "\n";
+				os << (pos == j ? "1" : "0");
+			os << "\n";
 		}
-		std::cout << "\n";
+		os << "\n";
 
 		return os;
 	}
