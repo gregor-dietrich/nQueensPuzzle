@@ -1,21 +1,26 @@
 // ReSharper disable CppUnreachableCode
 #include "chessboard.h"
-#include <vector>
 
 using namespace std;
 
-auto get_solutions() -> std::vector<chessboard>
+auto main() -> int
 {
-	vector<chessboard> solutions;
+	auto solutions = static_cast<chessboard*>(malloc(Q));
+	uint64_t solution_count = 0;
 
 	if (Q < 4)
 	{
 		if (Q == 1)
 		{
-			uint8_t solution [1] = {0};
-			solutions.emplace_back(solution);
+			uint8_t arr [1] = {0};
+			const auto solution = chessboard(arr);
+			solutions[solution_count] = solution;
+			solution_count++;
 		}
-		return solutions;
+		for (uint64_t i = 0; i < solution_count; i++)
+			cout << solutions[i];
+		cout << "Solutions found: " << solution_count << "\n";
+		return 0;
 	}
 	
 	uint8_t elements_to_permute [Q] = {};
@@ -30,7 +35,18 @@ auto get_solutions() -> std::vector<chessboard>
 		{
 			const auto solution = chessboard(elements_to_permute);
 			if (solution.is_valid())
-				solutions.emplace_back(solution);
+			{
+				if (!solutions)
+					return -1;
+				solutions[solution_count] = solution;
+				solution_count++;
+				const auto temp = static_cast<chessboard*>(malloc((solution_count + 1) * Q));
+				if (!temp)
+					return -1;
+				memcpy(temp, solutions, solution_count * Q);
+				free(solutions);
+				solutions = temp;
+			}
 
 			if (i % 2 == 0)
 			{
@@ -55,16 +71,10 @@ auto get_solutions() -> std::vector<chessboard>
 		}
 	}
 
-	return solutions;
-}
-
-auto main() -> int
-{
-	const auto solutions = get_solutions();
-
-	for (const auto& solution : solutions)
-		cout << solution;
-	cout << "Solutions found: " << solutions.size() << "\n";
-
+	for (uint64_t index = 0; index < solution_count; index++)
+		cout << solutions[index];
+	cout << "Solutions found: " << solution_count << "\n";
+	
+	free(solutions);
 	return 0;
 }
