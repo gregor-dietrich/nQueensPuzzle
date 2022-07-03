@@ -8,14 +8,14 @@ auto main() -> int
 	// allocate memory for an array that can hold exactly one solution
 	auto solutions = static_cast<chessboard*>(malloc(Q));
 	// last index variable
-	uint64_t solution_count = 0;
+	uint64 solution_count = 0;
 
 	// handle chessboard size being too small
 	if (Q < 4)
 	{
 		if (Q == 1) // exactly 1 solution
 		{
-			uint8_t arr [1] = {0};
+			uint8 arr [1] = {0};
 			cout << chessboard(arr);
 			solution_count++;
 		} // else 0 solutions
@@ -24,13 +24,13 @@ auto main() -> int
 	}
 
 	// create array containing all valid positions on chessboard
-	uint8_t elements_to_permute [Q] = {};
-	for (uint8_t i = 0; i < Q; i++)
+	uint8 elements_to_permute [Q] = {};
+	for (uint8 i = 0; i < Q; i++)
 		elements_to_permute[i] = i;
 
 	// iterate over all possible permutations of valid positions
-	uint8_t c [Q] = {0};
-	uint8_t i = 0;
+	uint8 c [Q] = {0};
+	uint8 i = 0;
 	while (i < Q)
 	{
 		if (c[i] < i)
@@ -86,7 +86,7 @@ auto main() -> int
 	}
 
 	// display all valid solutions found and their total amount
-	for (uint64_t index = 0; index < solution_count; index++)
+	for (uint64 index = 0; index < solution_count; index++)
 		cout << solutions[index];
 	cout << "Solutions found: " << solution_count << "\n";
 
