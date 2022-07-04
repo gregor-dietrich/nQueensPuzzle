@@ -50,7 +50,7 @@ auto main() -> int
 						return -1; // in case malloc failed
 
 					// copy all solutions from solutions to temp
-					memcpy(temp, solutions, solution_count * Q);
+					memcpy(temp, solutions, (solution_count - 1) * Q);
 					// deallocate memory used by old array
 					free(solutions);
 					// set solutions symbol to point to new array
