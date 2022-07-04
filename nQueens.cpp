@@ -5,9 +5,9 @@ using namespace std;
 
 auto main() -> int
 {
-	// allocate memory for an array that can hold exactly one solution
-	auto solutions = static_cast<chessboard*>(malloc(Q));
-	// last index variable
+	// array for valid chessboards
+	chessboard* solutions = nullptr;
+	// tracks array's size
 	uint64 solution_count = 0;
 
 	// handle chessboard size being too small
@@ -39,25 +39,31 @@ auto main() -> int
 			const auto solution = chessboard(elements_to_permute);
 			if (solution.is_valid())
 			{
-				if (!solutions)
-					return -1; // in case malloc failed
-
-				// add solution to solutions array
-				solutions[solution_count] = solution;
-				// increment last index variable
+				// increment array's size
 				solution_count++;
 
-				// allocate memory for an array that can hold exactly one additional solution
-				const auto temp = static_cast<chessboard*>(malloc((solution_count + 1) * Q));
-				if (!temp)
-					return -1; // in case malloc failed
+				if (solutions)
+				{
+					// allocate memory for an array that can hold exactly one additional solution
+					const auto temp = static_cast<chessboard*>(malloc(solution_count * Q));
+					if (!temp)
+						return -1; // in case malloc failed
 
-				// copy all solutions from solutions to temp
-				memcpy(temp, solutions, solution_count * Q);
-				// deallocate memory used by old array
-				free(solutions);
-				// set solutions to point to new array
-				solutions = temp;
+					// copy all solutions from solutions to temp
+					memcpy(temp, solutions, solution_count * Q);
+					// deallocate memory used by old array
+					free(solutions);
+					// set solutions symbol to point to new array
+					solutions = temp;
+				}
+				else // allocate memory for an array that can hold the first solution
+					solutions = static_cast<chessboard*>(malloc(Q));
+
+				if (!solutions)
+						return -1; // in case malloc failed
+
+				// add solution to solutions array
+				solutions[solution_count - 1] = solution;
 			}
 
 			if (i % 2 == 0) // i is even
