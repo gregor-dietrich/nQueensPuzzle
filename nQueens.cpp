@@ -60,7 +60,7 @@ auto main() -> int
 					solutions = static_cast<chessboard*>(malloc(Q));
 
 				if (!solutions)
-						return -1; // in case malloc failed
+					return -1; // in case malloc failed
 
 				// add solution to solutions array
 				solutions[solution_count - 1] = solution;
